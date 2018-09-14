@@ -1,19 +1,22 @@
-import socket
 import optparse
 from socket import *
+from threading import *
 def connscan(tgthost,tgtport):
+    screenlock=Semaphore(value=1)
     try:
         conn=socket(AF_INET,SOCK_STREAM)
         conn.connect((tgthost,tgtport))
         conn.send('heloooo \n\r')
+        screenlock.acquire()
         recvv=conn.recv(1000)
         print("[+] port %d is open "%(tgtport))
         print("resaults for this port :"+str(recvv))
-        conn.close()
-
     except:
+        screenlock.acquire()
         print("[-] port %d is close"%(tgtport))
-
+    finally:
+        screenlock.release()
+        conn.close()
 def portscan(tgthost,tgtports):
     try:
         tgtip = gethostbyname(tgthost)
@@ -26,10 +29,10 @@ def portscan(tgthost,tgtports):
     except:
         print("scan resaults for :"+tgtip)
     setdefaulttimeout(1)
+    print ("========================")
     for tgtport in tgtports:
-        print ("========================")
-        print("Scanning port :"+tgtport)
-        connscan(tgthost,int(tgtport))
+        t=Thread(target=connscan,args=(tgthost,int(tgtport)))
+        t.start()
 
 def main():
     parser = optparse.OptionParser("usage %prog "+"-H <target host> -P <target port>")
