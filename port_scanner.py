@@ -32,9 +32,9 @@ def portscan(tgthost,tgtports):
         connscan(tgthost,int(tgtport))
 
 def main():
-    parser = optparse.OptionParser("usage %prog "+"-H <target host> -p <target port>")
+    parser = optparse.OptionParser("usage %prog "+"-H <target host> -P <target port>")
     parser.add_option('-H', dest='tgthost', type='string',help='specify target host')
-    parser.add_option('-p', dest='tgtport', type='string',help='specify target port[s] separated by comma')
+    parser.add_option('-P', dest='tgtport', type='string',help='specify target port[s] separated by comma')
     (options, args) = parser.parse_args()
     tgthost = options.tgthost
     tgtports = str(options.tgtport).split(",")
