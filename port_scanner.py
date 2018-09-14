@@ -29,7 +29,7 @@ def portscan(tgthost,tgtports):
     for tgtport in tgtports:
         print ("========================")
         print("Scanning port :"+tgtport)
-        connscan(tgthost,int(tgtport))
+        connscan(tgtip,int(tgtport))
 
 def main():
     parser = optparse.OptionParser("usage %prog "+"-H <target host> -P <target port>")
