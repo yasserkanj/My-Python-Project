@@ -1,7 +1,10 @@
 import optparse
 from socket import *
 from threading import *
+
+
 def connscan(tgthost,tgtport):
+#check every port as Thread
     screenlock=Semaphore(value=1)
     try:
         conn=socket(AF_INET,SOCK_STREAM)
@@ -17,7 +20,9 @@ def connscan(tgthost,tgtport):
     finally:
         screenlock.release()
         conn.close()
+
 def portscan(tgthost,tgtports):
+#check th ip and after that it calls connscan as Thread
     try:
         tgtip = gethostbyname(tgthost)
     except:
