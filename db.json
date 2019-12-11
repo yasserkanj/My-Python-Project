@@ -1,4 +1,4 @@
-{
+[
   {
     id: 1,
     name: 'Leanne Graham',
@@ -59,4 +59,4 @@
     username: 'Moriah.Stanton',
     email: 'Rey.Padberg@karina.biz'
   }
-}
+]
